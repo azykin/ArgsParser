@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgsParserConsole", "ArgsParser.Console\ArgsParserConsole.csproj", "{AD9FF775-6478-408C-BBB8-BFBD778C1DE0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgsParser", "ArgsParser\ArgsParser.csproj", "{571836C2-258E-490F-972D-195BD47D9EEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgsParserTest", "ArgsParser.Test\ArgsParserTest.csproj", "{BB4C5EAB-8998-4D5F-87F4-93EDEC8FFCCD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AD9FF775-6478-408C-BBB8-BFBD778C1DE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD9FF775-6478-408C-BBB8-BFBD778C1DE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD9FF775-6478-408C-BBB8-BFBD778C1DE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD9FF775-6478-408C-BBB8-BFBD778C1DE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{571836C2-258E-490F-972D-195BD47D9EEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{571836C2-258E-490F-972D-195BD47D9EEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{571836C2-258E-490F-972D-195BD47D9EEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{571836C2-258E-490F-972D-195BD47D9EEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB4C5EAB-8998-4D5F-87F4-93EDEC8FFCCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB4C5EAB-8998-4D5F-87F4-93EDEC8FFCCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB4C5EAB-8998-4D5F-87F4-93EDEC8FFCCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB4C5EAB-8998-4D5F-87F4-93EDEC8FFCCD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
