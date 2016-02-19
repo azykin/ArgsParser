@@ -61,7 +61,7 @@ public class Options : ArgsOptionsBase
 	public string FilePath { get; set; }
 	
 	[PropertyParamAttribute("types", "ResolveFileTypes", DefaultValue = new string[] { ".txt", ".log" }, 
-	 Description = "Source data file", Example = "appname -types .txt .doc .rtf")]
+	 Description = "Resolves file types", Example = "appname -types .txt .doc .rtf")]
 	public string[] Types { get; set; }
 	
 	[PropertyParamAttribute("maxval", "MaxValue", DefaultValue=100, Description="Max items count",
