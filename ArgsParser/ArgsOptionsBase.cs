@@ -20,24 +20,13 @@ namespace ArgsParser
         /// <returns></returns>
         public virtual string GetParamHelp()
         {
-            var props = this.GetType().GetProperties().Where(x => x.GetCustomAttribute<PropertyParamAttribute>() != null).ToArray();
-
-            var methods = this.GetType().GetMethods().Where(x => x.GetCustomAttribute<MethodParamAttribute>() != null).ToArray();
+            var members = this.GetType().GetMembers().Where(x => x.GetCustomAttribute<ParamAttribute>() != null).ToArray();
 
             var showList = new List<Tuple<string, string, string>>();
 
-            foreach (var p in props)
+            foreach (var m in members)
             {
-                var atr = p.GetCustomAttribute<PropertyParamAttribute>(); 
-                if  (atr == null) continue;
-
-                showList.Add(new Tuple<string, string, string>(atr.Key, atr.Description, atr.Example));
-            }
-
-            foreach (var m in methods)
-            {
-                var atr = m.GetCustomAttribute<MethodParamAttribute>(); 
-                if (atr == null) continue;
+                var atr = m.GetCustomAttribute<ParamAttribute>(); 
 
                 showList.Add(new Tuple<string, string, string>(atr.Key, atr.Description, atr.Example));
             }
@@ -60,24 +49,13 @@ namespace ArgsParser
         /// <returns></returns>
         public string GetParamExample()
         {
-            var props = this.GetType().GetProperties().Where(x => x.GetCustomAttribute<ParamAttribute>() != null);
-
-            var methods = this.GetType().GetMethods().Where(x => x.GetCustomAttribute<ParamAttribute>() != null);
+            var members = this.GetType().GetMembers().Where(x => x.GetCustomAttribute<ParamAttribute>() != null).ToArray();
 
             var showList = new List<Tuple<string, string, string>>();
 
-            foreach (var p in props)
+            foreach (var m in members)
             {
-                var atr = p.GetCustomAttribute<PropertyParamAttribute>();
-                if (atr == null) continue;
-
-                showList.Add(new Tuple<string, string, string>(atr.Key, atr.Description, atr.Example));
-            }
-
-            foreach (var m in methods)
-            {
-                var atr = m.GetCustomAttribute<MethodParamAttribute>();
-                if (atr == null) continue;
+                var atr = m.GetCustomAttribute<ParamAttribute>();
 
                 showList.Add(new Tuple<string, string, string>(atr.Key, atr.Description, atr.Example));
             }

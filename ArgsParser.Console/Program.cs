@@ -48,20 +48,20 @@ namespace ArgsParserConsole
         public string[] Formats2 { get; set; }
 
         [MethodParamAttribute(FullName: "Help", Key: "?", Description = "help for this programm", Priority = 0, Example = "? 100 asdf")]
-        public void help(int aaa, string bbb)
+        public void Help(int aaa, string bbb)
         {
             Console.WriteLine("Help: {0} _ {1}", aaa, bbb);
             base.GetParamHelp();
         }
 
         [MethodParamAttribute(FullName: "hl", Key: "hl", Description = "help for this programm", Priority = 1, Example = "hl")]
-        public void examp()
+        public void Examp()
         {
             base.GetParamExample();
         }
 
         [MethodParamAttribute("h", "Hide", Description = "Hide console window", Priority = 0, Example = "h - console window not will be showed")]
-        public void hide()
+        public void Hide()
         {
             IntPtr h = Process.GetCurrentProcess().MainWindowHandle;
             ShowWindow(h, 0);

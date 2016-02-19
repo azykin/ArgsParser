@@ -63,7 +63,7 @@ namespace ArgsParser
 
             // Get and pars properties
             var props = typeof(T).GetProperties();              //.Where(x => x.GetCustomAttributes<ParamAttribute>().Count() != 0);
-            ParseProperties<T>(option, dArgs, props);
+            ParseProperties<T>(option, dArgs);
 
             // Get and parse methods
             var methods = typeof(T).GetMethods();               //.Where(x => x.GetCustomAttributes<ParamAttribute>().Count() != 0);
@@ -108,9 +108,9 @@ namespace ArgsParser
             return invokeMethods;
         }
 
-        private static void ParseProperties<T>(T option, Dictionary<string, string> dArgs, PropertyInfo[] props)
+        private static void ParseProperties<T>(T option, Dictionary<string, string> dArgs)
         {
-            foreach (var p in props)
+            foreach (var p in option.GetType().GetProperties())
             {
                 var atr = p.GetCustomAttribute<PropertyParamAttribute>();
 
