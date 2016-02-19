@@ -62,11 +62,11 @@ namespace ArgsParser
             var dArgs = ArgsToDictionary(args);
 
             // Get and pars properties
-            var props = typeof(T).GetProperties();              //.Where(x => x.GetCustomAttributes<ParamAttribute>().Count() != 0);
+            var props = typeof(T).GetProperties();
             ParseProperties<T>(option, dArgs);
 
             // Get and parse methods
-            var methods = typeof(T).GetMethods();               //.Where(x => x.GetCustomAttributes<ParamAttribute>().Count() != 0);
+            var methods = typeof(T).GetMethods();
             var invokeMethods = ParseMethods<T>(option, methods, dArgs);
 
             // Invoke parsed methods
@@ -84,14 +84,14 @@ namespace ArgsParser
         private static Dictionary<int, Action> ParseMethods<T>(T option, IEnumerable<MethodInfo> methods, Dictionary<string, string> dArgs)
         {
             var invokeMethods = new Dictionary<int, Action>();
-            foreach (var m in methods)
+            foreach (var method in methods)
             {
-                var atr = m.GetCustomAttribute<MethodParamAttribute>();
+                var atr = method.GetCustomAttribute<MethodParamAttribute>();
                 if (atr == null) continue;
 
                 if (dArgs.ContainsKey(atr.Key) || dArgs.ContainsKey(atr.FullName))
                 {
-                    var mParams = m.GetParameters();
+                    var mParams = method.GetParameters();
                     var mParamVal = (dArgs[atr.Key] ?? dArgs[atr.FullName]).Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                     if (mParams.Count() != mParamVal.Count())
                         throw new Exception("The count of input parameters does not match the method signature!");
@@ -102,7 +102,7 @@ namespace ArgsParser
                         resParams.Add(Convert.ChangeType(mParamVal[i], mParams[i].ParameterType));
                     }
 
-                    invokeMethods.Add(atr.Priority, new Action(() => { m.Invoke(option, resParams.ToArray()); }));
+                    invokeMethods.Add(atr.Priority, new Action(() => { method.Invoke(option, resParams.ToArray()); }));
                 }
             }
             return invokeMethods;
@@ -110,17 +110,17 @@ namespace ArgsParser
 
         private static void ParseProperties<T>(T option, Dictionary<string, string> dArgs)
         {
-            foreach (var p in option.GetType().GetProperties())
+            foreach (var property in option.GetType().GetProperties())
             {
-                var atr = p.GetCustomAttribute<PropertyParamAttribute>();
+                var atr = property.GetCustomAttribute<PropertyParamAttribute>();
 
                 if (atr == null) continue;
 
                 if (dArgs.ContainsKey(atr.Key) || dArgs.ContainsKey(atr.FullName))
                 {
-                    if (p.PropertyType == typeof(bool)) // bool
+                    if (property.PropertyType == typeof(bool)) // bool
                     {
-                        SetPropVal(option, true, p);
+                        SetPropVal(option, true, property);
                         continue;
                     }
                     else
@@ -130,35 +130,39 @@ namespace ArgsParser
                         var name = dArgs.ContainsKey(atr.FullName) && !string.IsNullOrEmpty(dArgs[atr.FullName])
                                         ? dArgs[atr.FullName] : null;
 
-                        if (p.PropertyType.IsArray) // Collection
+                        if (property.PropertyType.IsArray) // Collection
                         {
                             var val = key ?? name;
 
-                            SetPropVal(option, val.Split(' ') ?? atr.DefaultValue, p);
+                            SetPropVal(option, val.Split(' ') ?? atr.DefaultValue, property);
                             continue;
                         }
                         else // other types
                         {
-                            SetPropVal(option, key ?? name ?? atr.DefaultValue, p);
+                            SetPropVal(option, key ?? name ?? atr.DefaultValue, property);
                         }
                     }
                 }
                 else
                 {
-                    if (p.PropertyType == typeof(bool))
+                    if (property.PropertyType == typeof(bool))
                     {
-                        SetPropVal(option, atr.DefaultValue ?? false, p);
+                        SetPropVal(option, atr.DefaultValue ?? false, property);
+                    }
+                    else
+                    {
+                        SetPropVal(option, atr.DefaultValue, property);
                     }
                 }
             }
         }
 
         // controlled set value
-        private static void SetPropVal(object option, object val, PropertyInfo p)
+        private static void SetPropVal(object option, object val, PropertyInfo property)
         {
-            if (p.CanWrite && (val) != null)
+            if (property.CanWrite && (val) != null)
             {
-                p.SetValue(option, Convert.ChangeType(val, p.PropertyType, CultureInfo.InvariantCulture));
+                property.SetValue(option, Convert.ChangeType(val, property.PropertyType, CultureInfo.InvariantCulture));
             }
         }
 

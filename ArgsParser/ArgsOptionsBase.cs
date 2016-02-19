@@ -47,7 +47,7 @@ namespace ArgsParser
         /// Shows the examples on all the above parameters
         /// </summary>
         /// <returns></returns>
-        public string GetParamExample()
+        public virtual string GetParamExample()
         {
             var members = this.GetType().GetMembers().Where(x => x.GetCustomAttribute<ParamAttribute>() != null).ToArray();
 
