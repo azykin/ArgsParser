@@ -85,3 +85,10 @@ You can use the base class `ArgsOptionsBase` or the interface `IArgsHelpViewer` 
 Console.WriteLine(options.GetParamHelp());
 Console.WriteLine(options.GetParamExample());
 ```
+You can change the prefix of the key specifying it in the static value of the `ArgsManager.KeyPrefix` class . For example:
+```c#
+ArgsManager.KeyPrefix = "-"; // use: appname -log (default)
+ArgsManager.KeyPrefix = "/"; // use: appname /log
+ArgsManager.KeyPrefix = "--"; // use: appname --log
+etc.
+```
