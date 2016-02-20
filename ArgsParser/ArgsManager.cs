@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ArgsParser
 {
@@ -148,6 +145,10 @@ namespace ArgsParser
                     if (p.PropertyType == typeof(bool))
                     {
                         SetPropVal(option, atr.DefaultValue ?? false, p);
+                    }
+                    else
+                    {
+                        SetPropVal(option, atr.DefaultValue, p);
                     }
                 }
             }

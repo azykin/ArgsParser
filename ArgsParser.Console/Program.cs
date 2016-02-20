@@ -1,11 +1,7 @@
-﻿using ArgsParser;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ArgsParserConsole
 {
@@ -35,7 +31,7 @@ namespace ArgsParserConsole
         [PropertyParamAttribute("f", "Flag", DefaultValue = false, Description = "Проверка типа флага", Example = "fl")]
         public bool Flag { get; set; }
 
-        [PropertyParamAttribute("int", "Integer", DefaultValue = "10", Description = "Проверка числа", Example = "t 1234")]
+        [PropertyParamAttribute("int", "Integer",  Description = "Проверка числа", Example = "t 1234")]
         public int IntValue { get; set; }
 
         [PropertyParamAttribute("d", "Double", DefaultValue = "10,4", Description = "Число с запятой", Example = "d 9.5 or d 9,5")]
